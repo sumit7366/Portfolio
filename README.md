@@ -31,9 +31,7 @@ Welcome to the personal portfolio website of **Sumit Kumar**. This project showc
 
 Visit the [Photo Gallery](gallery.html) for more visuals.
 
-## 📄 Resume
 
-[Download Resume](images/Sumit_kumar-resume.pdf)
 
 ## 📬 Contact
 
