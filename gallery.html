@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Gallery | Sumit Kumar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      object-fit: cover;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 15px 0 5px;
+      font-size: 32px;
+    }
+
+    header p {
+      font-size: 16px;
+      color: #e2e2e2;
+    }
+
+    header p .upload-trigger {
+      color: #c0c0ff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Gallery Grid */
+    .gallery {
+      padding: 20px 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      max-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.5);
+      z-index: 1;
+    }
+
+    .download-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      padding: 6px 10px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 2;
+    }
+
+    .image-container:hover .download-btn {
+      opacity: 1;
+    }
+
+    .download-btn:hover {
+      background: #333;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer a {
+      margin: 0 10px;
+      font-size: 24px;
+    }
+
+    /* Upload button */
+    #upload-container {
+      margin: 20px auto;
+      text-align: center;
+      display: none;
+    }
+
+    #upload-container input[type="file"] {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="images/about.jpg" alt="Sumit Kumar" />
+    <h1>Sumit Kumar</h1>
+    <p>BCA Student at St. Xavier’s <span class="upload-trigger" title="Click to upload picture">College</span> of Management and Technology</p>
+  </header>
+
+  <!-- Upload Input (hidden by default) -->
+  <div id="upload-container">
+    <input type="file" id="file-upload" accept="image/*" />
+  </div>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <!-- Existing images -->
+    <div class="image-container">
+      <img src="image/1.jpg" alt="Gallery Photo 1">
+      <a class="download-btn" href="image/1.jpg" download title="Download">
+        <i class="fa fa-download"></i>
+      </a>
+    </div>
+    <div class="image-container">
+      <img src="image/2.jpg" alt="Gallery Photo 2">
+      <a class="download-btn" href="image/2.jpg" download title="Download">
+        <i class="fa fa-download"></i>
+      </a>
+    </div>
+    <div class="image-container">
+      <img src="image/3.jpg" alt="Gallery Photo 3">
+      <a class="download-btn" href="image/3.jpg" download title="Download">
+        <i class="fa fa-download"></i>
+      </a>
+    </div>
+    <div class="image-container">
+      <img src="image/4.jpg" alt="Gallery Photo 4">
+      <a class="download-btn" href="image/4.jpg" download title="Download">
+        <i class="fa fa-download"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div style="margin-bottom: 10px;">
+      <a href="https://www.instagram.com/9._sumit" target="_blank" title="Instagram" style="color: #C13584;">
+        <i class="fa fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/sumit7366/" target="_blank" title="LinkedIn" style="color: #0077b5;">
+        <i class="fa fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/sumit7366" target="_blank" title="GitHub" style="color: #333;">
+        <i class="fa fa-github"></i>
+      </a>
+    </div>
+    <p style="margin: 0; font-size: 14px; color: #666;">&copy; 2025 Sumit Kumar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Elements
+    const uploadTrigger = document.querySelector('.upload-trigger');
+    const uploadContainer = document.getElementById('upload-container');
+    const fileInput = document.getElementById('file-upload');
+    const gallery = document.getElementById('gallery');
+
+    // Show/hide upload input on clicking "college"
+    uploadTrigger.addEventListener('click', () => {
+      if (uploadContainer.style.display === 'none' || uploadContainer.style.display === '') {
+        uploadContainer.style.display = 'block';
+      } else {
+        uploadContainer.style.display = 'none';
+      }
+    });
+
+    // Handle file input change
+    fileInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      if (files.length === 0) return;
+
+      for (const file of files) {
+        if (!file.type.startsWith('image/')) {
+          alert('Please upload an image file.');
+          continue;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          // Create new image container div
+          const container = document.createElement('div');
+          container.className = 'image-container';
+
+          // Create img element
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Uploaded Photo';
+
+          // Create download button (download won't work for local URLs, but we add for UI consistency)
+          const downloadLink = document.createElement('a');
+          downloadLink.className = 'download-btn';
+          downloadLink.href = e.target.result;
+          downloadLink.setAttribute('download', 'uploaded-photo');
+          downloadLink.title = 'Download';
+
+          const icon = document.createElement('i');
+          icon.className = 'fa fa-download';
+          downloadLink.appendChild(icon);
+
+          // Append image and download button to container
+          container.appendChild(img);
+          container.appendChild(downloadLink);
+
+          // Append container to gallery
+          gallery.appendChild(container);
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      // Reset file input for next upload
+      fileInput.value = '';
+    });
+  </script>
+
+</body>
+
+</html>
